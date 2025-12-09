@@ -1,24 +1,30 @@
 📚 Sistema de Biblioteca com Django
 👥 Membros do Grupo
-Gabriel Amaral - CP3025624
-Emilly Cabuçu - CP3025781
+
+Gabriel Amaral – CP3025624
+
+Emilly Cabuçu – CP3025781
 
 🎯 Descrição do Projeto
-Sistema web completo para gestão de bibliotecas desenvolvido com Django Framework. O sistema permite o gerenciamento de livros, autores, categorias e empréstimos, implementando operações CRUD completas com interface moderna e responsiva.
+
+Sistema web completo para gestão de bibliotecas desenvolvido com Django Framework.
+O sistema permite o gerenciamento de livros, autores, categorias e empréstimos, implementando operações CRUD completas, com interface moderna e responsiva baseada em Bootstrap.
 
 🛠 Tecnologias Utilizadas
 Backend
+
 Python 3.10+
 
 Django 4.2.7
 
-SQLite (desenvolvimento)
+SQLite (Ambiente de desenvolvimento)
 
 Django Crispy Forms
 
-Pillow (manipulação de imagens)
+Pillow (upload de imagens)
 
 Frontend
+
 HTML5
 
 CSS3
@@ -30,6 +36,7 @@ JavaScript
 Bootstrap Icons
 
 Ferramentas de Desenvolvimento
+
 Git
 
 Visual Studio Code
@@ -39,164 +46,171 @@ DB Browser for SQLite
 Postman (testes de API)
 
 📁 Estrutura do Projeto
-text
 biblioteca_django/
 ├── biblioteca/                 # Configuração do projeto Django
 │   ├── __init__.py
-│   ├── settings.py            # Configurações
-│   ├── urls.py                # Rotas principais
+│   ├── settings.py             # Configurações gerais
+│   ├── urls.py                 # Rotas principais
 │   └── wsgi.py
-├── core/                      # Aplicação principal
-│   ├── migrations/           # Migrações do banco
-│   ├── models.py            # Modelos de dados
-│   ├── views.py             # Lógica da aplicação
-│   ├── admin.py             # Painel administrativo
-│   └── templates/core/      # Templates HTML
-├── static/                   # Arquivos estáticos
-├── media/                    # Uploads de arquivos
-├── templates/               # Templates base
+├── core/                       # Aplicação principal
+│   ├── migrations/             # Migrações do banco
+│   ├── models.py               # Modelos de dados
+│   ├── views.py                # Regras de negócio
+│   ├── admin.py                # Admin Django
+│   └── templates/core/         # Templates HTML da aplicação
+├── static/                     # Arquivos estáticos
+├── media/                      # Uploads (capas, fotos)
+├── templates/                  # Templates globais
 │   ├── base.html
-│   └── registration/
-├── db.sqlite3               # Banco de dados
-├── manage.py                # Script de gerenciamento
-├── requirements.txt         # Dependências Python
-└── README.md               # Esta documentação
+│   └── registration/           # Telas de login/registro
+├── db.sqlite3                  # Banco de dados
+├── manage.py                   # Script de gerenciamento Django
+├── requirements.txt            # Dependências Python
+└── README.md
+
 🗃️ Modelos do Banco de Dados
 1. Autor
-nome (CharField): Nome completo do autor
 
-nacionalidade (CharField): Nacionalidade
+nome
 
-data_nascimento (DateField): Data de nascimento
+nacionalidade
 
-biografia (TextField): Biografia do autor
+data_nascimento
+
+biografia
 
 2. Categoria
-nome (CharField): Nome da categoria
 
-descricao (TextField): Descrição detalhada
+nome
 
-3. Livro ✅ CRUD COMPLETO
-titulo (CharField): Título do livro
+descricao
 
-autor (ForeignKey): Relacionamento com Autor
+3. Livro (CRUD COMPLETO)
 
-isbn (CharField): ISBN único (13 dígitos)
+titulo
 
-editora (CharField): Editora
+autor (ForeignKey)
 
-ano_publicacao (IntegerField): Ano de publicação
+isbn
 
-categoria (ForeignKey): Relacionamento com Categoria
+editora
 
-quantidade (IntegerField): Quantidade disponível
+ano_publicacao
 
-disponivel (BooleanField): Status de disponibilidade
+categoria (ForeignKey)
 
-sinopse (TextField): Sinopse do livro
+quantidade
 
-capa (ImageField): Imagem da capa (opcional)
+disponivel
 
-data_cadastro (DateTimeField): Data de cadastro automática
+sinopse
 
-4. Empréstimo ✅ CRUD COMPLETO
-livro (ForeignKey): Livro emprestado
+capa (ImageField)
 
-usuario (ForeignKey): Usuário que fez o empréstimo
+data_cadastro
 
-data_emprestimo (DateTimeField): Data do empréstimo
+4. Empréstimo (CRUD COMPLETO)
 
-data_devolucao (DateField): Data prevista para devolução
+livro (ForeignKey)
 
-data_devolvido (DateField): Data real da devolução
+usuario (ForeignKey)
 
-status (CharField): Status (pendente/ativo/devolvido/atrasado)
+data_emprestimo
 
-observacoes (TextField): Observações
+data_devolucao
 
-5. Perfil ✅ CRUD COMPLETO
-user (OneToOneField): Relacionamento com User do Django
+data_devolvido
 
-telefone (CharField): Telefone do usuário
+status
 
-endereco (TextField): Endereço completo
+observacoes
 
-cpf (CharField): CPF (único)
+5. Perfil (CRUD COMPLETO)
 
-data_nascimento (DateField): Data de nascimento
+user (OneToOne)
 
-foto (ImageField): Foto de perfil (opcional)
+telefone
 
-🌐 Endpoints da API
-Rotas Principais
-text
-/                           → Página inicial
-/login/                     → Login de usuários
-/logout/                    → Logout seguro
-/registro/                  → Registro de novos usuários
-/sobre/                     → Página sobre o sistema
-/perfil/                    → Perfil do usuário
-CRUD Livros 📖
-text
-/livros/                    → Lista todos os livros (READ)
-/livros/adicionar/          → Adicionar novo livro (CREATE)
-/livros/<id>/               → Detalhes do livro (READ)
-/livros/<id>/editar/        → Editar livro existente (UPDATE)
-/livros/<id>/excluir/       → Excluir livro (DELETE)
-Painel Administrativo
-text
-/admin/                     → Painel administrativo Django
+endereco
+
+cpf
+
+data_nascimento
+
+foto
+
+🌐 Endpoints / Rotas Principais
+Autenticação
+/login/                
+/logout/               
+/registro/
+
+Páginas Gerais
+/                      → Página inicial
+/sobre/                → Sobre o sistema
+/perfil/               → Perfil do usuário
+
+Livros – CRUD
+/livros/               → Listagem
+/livros/adicionar/     → Criar
+/livros/<id>/          → Detalhes
+/livros/<id>/editar/   → Atualizar
+/livros/<id>/excluir/  → Deletar
+
+Admin Django
+/admin/
+
 💻 Funcionalidades Implementadas
-✅ Autenticação e Autorização
-Sistema completo de login/logout
+✅ Autenticação Completa
 
-Registro de novos usuários
+Login / Logout
 
-Páginas protegidas por autenticação
+Registro de usuários
 
-Perfil de usuário personalizado
+Perfil personalizado
 
-✅ CRUD Completo (3 CRUDs)
-Livros - Create, Read, Update, Delete
+Acesso restrito por login
 
-Autores - Create, Read, Update, Delete
+✅ CRUDs Completos (3 obrigatórios)
 
-Empréstimos - Create, Read, Update, Delete
+Livros
 
-✅ Interface do Usuário
-Design responsivo com Bootstrap 5
+Autores
 
-Navegação intuitiva
+Empréstimos
+
+✅ Interface Moderna
+
+Bootstrap 5
+
+Layout responsivo
 
 Formulários validados
 
-Mensagens de feedback
-
-Upload de imagens (capas e fotos)
+Upload de imagens
 
 ✅ Painel Administrativo
-Interface Django Admin customizada
 
-Filtros e buscas avançadas
+Filtros, busca e ordenação
 
-Gerenciamento completo de dados
+Edição rápida
 
-Exportação de dados
+Gerenciamento completo dos dados
 
 🚀 Instalação e Configuração
 Pré-requisitos
-Python 3.10 ou superior
 
-Pip (gerenciador de pacotes Python)
+Python 3.10+
 
-Git (opcional)
+Pip
 
-Passo 1: Clonar o repositório
-bash
-git clone https://github.com/seu-usuario/biblioteca-django.git
+Git
+
+1. Clonar o Repositório
+git clone https://github.com/amaral-spec/DevWeb3.git
 cd biblioteca-django
-Passo 2: Criar ambiente virtual
-bash
+
+2. Criar Ambiente Virtual
 # Windows
 python -m venv venv
 venv\Scripts\activate
@@ -204,173 +218,118 @@ venv\Scripts\activate
 # Linux/Mac
 python3 -m venv venv
 source venv/bin/activate
-Passo 3: Instalar dependências
-bash
+
+3. Instalar Dependências
 pip install -r requirements.txt
-Passo 4: Configurar banco de dados
-bash
+
+4. Fazer Migrações
 python manage.py makemigrations
 python manage.py migrate
-Passo 5: Criar superusuário
-bash
+
+5. Criar Superusuário
 python manage.py createsuperuser
-# Siga as instruções para criar usuário admin
-Passo 6: Coletar arquivos estáticos
-bash
+
+6. Coletar Arquivos Estáticos
 python manage.py collectstatic
-Passo 7: Executar servidor de desenvolvimento
-bash
+
+7. Executar o Servidor
 python manage.py runserver
-Passo 8: Acessar a aplicação
-text
-Navegador: http://localhost:8000
+
+8. Acessar o Sistema
+Aplicação: http://localhost:8000
 Admin:     http://localhost:8000/admin
+
 📊 Populando o Banco de Dados
-Opção 1: Via Painel Admin
-Acesse http://localhost:8000/admin
+Via Django Admin
 
-Use as credenciais do superusuário
+Acesse /admin
 
-Adicione dados manualmente
+Use o superusuário criado
 
-Opção 2: Via Shell Django
-bash
-python manage.py shell
-python
+Adicione autores, livros e categorias
+
+Via Shell Django
 from core.models import Autor, Categoria, Livro
 
-# Criar categorias
-categorias = ['Ficção', 'Tecnologia', 'História', 'Ciência', 'Literatura']
-for nome in categorias:
-    Categoria.objects.get_or_create(nome=nome)
+Categoria.objects.create(nome='Tecnologia')
+Autor.objects.create(nome='George Orwell', nacionalidade='Britânico')
 
-# Criar autores
-autores = [
-    {'nome': 'Machado de Assis', 'nacionalidade': 'Brasileiro'},
-    {'nome': 'George Orwell', 'nacionalidade': 'Britânico'},
-    {'nome': 'Stephen King', 'nacionalidade': 'Americano'},
-]
-
-for autor_data in autores:
-    Autor.objects.get_or_create(**autor_data)
-
-# Criar livros de exemplo
-livro1 = Livro.objects.create(
-    titulo='Dom Casmurro',
-    autor=Autor.objects.get(nome='Machado de Assis'),
-    isbn='9788535930123',
-    editora='Companhia das Letras',
-    ano_publicacao=1899,
-    categoria=Categoria.objects.get(nome='Literatura'),
-    quantidade=5,
+Livro.objects.create(
+    titulo='1984',
+    autor=Autor.objects.get(nome='George Orwell'),
+    isbn='9780451524935',
+    editora='Secker & Warburg',
+    ano_publicacao=1949,
+    categoria=Categoria.objects.get(nome='Tecnologia'),
+    quantidade=10,
     disponivel=True,
-    sinopse='Romance clássico da literatura brasileira'
+    sinopse='Clássico distópico.'
 )
+
 🔧 Configurações Importantes
 settings.py
-python
-# Configurações principais
-DEBUG = True  # Alterar para False em produção
+DEBUG = True
 ALLOWED_HOSTS = ['localhost', '127.0.0.1']
 LANGUAGE_CODE = 'pt-br'
 TIME_ZONE = 'America/Sao_Paulo'
 
-# Arquivos estáticos e mídia
 STATIC_URL = 'static/'
 MEDIA_URL = 'media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_ROOT = BASE_DIR / 'media'
 
-# Autenticação
 LOGIN_REDIRECT_URL = 'home'
 LOGOUT_REDIRECT_URL = 'home'
 LOGIN_URL = 'login'
-🧪 Testando o Sistema
+
+🧪 Testes do Sistema
 Testes Manuais
-Registro de Usuário
 
-Acesse /registro/
+Registro
 
-Crie uma nova conta
+Login
 
-Verifique login automático
+CRUD de livros
 
-CRUD Livros
+CRUD de autores
 
-Faça login
+CRUD de empréstimos
 
-Acesse /livros/
-
-Teste todas as operações:
-
-Adicionar livro
-
-Visualizar detalhes
-
-Editar informações
-
-Excluir registro
-
-Painel Admin
-
-Acesse /admin/
-
-Gerencie todos os modelos
-
-Teste filtros e buscas
+Painel administrativo
 
 📱 Telas do Sistema
-1. Página Inicial
-Apresentação do sistema
 
-Estatísticas gerais
+Página inicial dinâmica
 
-Livros recentes
+Listagem de livros
 
-Links rápidos
+Formulários com validação
 
-2. Listagem de Livros
-Tabela com todos os livros
+Perfil de usuário
 
-Filtros por status
-
-Ações CRUD por linha
-
-Paginação (se implementada)
-
-3. Formulários
-Validação em tempo real
-
-Upload de imagens
-
-Seleção por dropdown
-
-Mensagens de erro/sucesso
-
-4. Perfil do Usuário
-Informações da conta
-
-Foto de perfil
-
-Histórico de empréstimos
-
-Opções de configuração
+Painel admin
 
 🐛 Solução de Problemas
-Problema 1: "ModuleNotFoundError"
-bash
-# Solução: Reinstalar dependências
-pip install --upgrade pip
+1. ModuleNotFoundError
 pip install -r requirements.txt
-Problema 2: Erro de migração
-bash
-# Solução: Recriar migrações
+
+2. Erros de migração
 python manage.py makemigrations
 python manage.py migrate
-Problema 3: Arquivos estáticos não carregam
-bash
-# Solução: Coletar arquivos estáticos
+
+3. Arquivos estáticos não carregam
 python manage.py collectstatic
-Problema 4: Acesso negado ao admin
-bash
-# Solução: Criar/redefinir superusuário
+
+4. Não consegue acessar o admin
 python manage.py createsuperuser
+
+📄 Licença
+
+Este projeto foi desenvolvido para fins educacionais.
+
+Se quiser, posso agora:
+
+✅ Criar o arquivo README.md automaticamente
+✅ Gerar todo o projeto Django
+✅ Criar todos os modelos, views, templates e URLs
+✅ Criar CRUD completo
+✅ Criar interface Bootstrap pronta
