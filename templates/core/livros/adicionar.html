@@ -1,0 +1,100 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Adicionar Livro - Biblioteca Digital{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-header bg-success text-white">
+                <h3 class="mb-0">
+                    <i class="bi bi-plus-circle"></i> Adicionar Novo Livro
+                </h3>
+            </div>
+            <div class="card-body">
+                <form method="post">
+                    {% csrf_token %}
+                    
+                    <div class="row">
+                        <!-- Título -->
+                        <div class="col-md-12 mb-3">
+                            <label for="titulo" class="form-label">Título *</label>
+                            <input type="text" class="form-control" id="titulo" name="titulo" 
+                                   required placeholder="Digite o título do livro">
+                        </div>
+                        
+                        <!-- Autor -->
+                        <div class="col-md-6 mb-3">
+                            <label for="autor" class="form-label">Autor *</label>
+                            <select class="form-select" id="autor" name="autor" required>
+                                <option value="">Selecione um autor...</option>
+                                {% for autor in autores %}
+                                <option value="{{ autor.id }}">{{ autor.nome }}</option>
+                                {% empty %}
+                                <option value="">Nenhum autor cadastrado</option>
+                                {% endfor %}
+                            </select>
+                            <small class="text-muted">
+                                <a href="/admin/core/autor/add/" target="_blank">Adicionar novo autor</a>
+                            </small>
+                        </div>
+                        
+                        <!-- Editora -->
+                        <div class="col-md-6 mb-3">
+                            <label for="editora" class="form-label">Editora</label>
+                            <input type="text" class="form-control" id="editora" name="editora" 
+                                   placeholder="Nome da editora">
+                        </div>
+                        
+                        <!-- Ano e Quantidade -->
+                        <div class="col-md-6 mb-3">
+                            <label for="ano_publicacao" class="form-label">Ano de Publicação</label>
+                            <input type="number" class="form-control" id="ano_publicacao" 
+                                   name="ano_publicacao" value="2024" min="1000" max="2100">
+                        </div>
+                        
+                        <div class="col-md-6 mb-3">
+                            <label for="quantidade" class="form-label">Quantidade *</label>
+                            <input type="number" class="form-control" id="quantidade" 
+                                   name="quantidade" value="1" min="1" required>
+                        </div>
+                        
+                        <!-- Categoria -->
+                        <div class="col-md-12 mb-3">
+                            <label for="categoria" class="form-label">Categoria</label>
+                            <select class="form-select" id="categoria" name="categoria">
+                                <option value="">Selecione uma categoria...</option>
+                                {% for categoria in categorias %}
+                                <option value="{{ categoria.id }}">{{ categoria.nome }}</option>
+                                {% empty %}
+                                <option value="">Nenhuma categoria cadastrada</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        
+                        <!-- Disponibilidade -->
+                        <div class="col-md-12 mb-3">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="disponivel" 
+                                       name="disponivel" checked>
+                                <label class="form-check-label" for="disponivel">
+                                    Disponível para empréstimo
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                        <a href="{% url 'listar_livros' %}" class="btn btn-secondary me-md-2">
+                            <i class="bi bi-x-circle"></i> Cancelar
+                        </a>
+                        <button type="submit" class="btn btn-success">
+                            <i class="bi bi-check-circle"></i> Salvar Livro
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

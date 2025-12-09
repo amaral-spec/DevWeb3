@@ -1,0 +1,98 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Livros - Biblioteca Digital{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h1>
+        <i class="bi bi-book"></i> Todos os Livros
+    </h1>
+    <a href="{% url 'adicionar_livro' %}" class="btn btn-success">
+        <i class="bi bi-plus-circle"></i> Adicionar Livro
+    </a>
+</div>
+
+{% if messages %}
+    {% for message in messages %}
+    <div class="alert alert-{{ message.tags }} alert-dismissible fade show">
+        {{ message }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+    {% endfor %}
+{% endif %}
+
+<div class="card">
+    <div class="card-body">
+        {% if livros %}
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead class="table-light">
+                    <tr>
+                        <th>ID</th>
+                        <th>Título</th>
+                        <th>Autor</th>
+                        <th>Editora</th>
+                        <th>Ano</th>
+                        <th>Status</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for livro in livros %}
+                    <tr>
+                        <td>{{ livro.id }}</td>
+                        <td>
+                            <strong>{{ livro.titulo }}</strong>
+                            {% if livro.categoria %}
+                            <br><small class="text-muted">{{ livro.categoria.nome }}</small>
+                            {% endif %}
+                        </td>
+                        <td>{{ livro.autor.nome }}</td>
+                        <td>{{ livro.editora }}</td>
+                        <td>{{ livro.ano_publicacao }}</td>
+                        <td>
+                            <span class="badge bg-{% if livro.disponivel %}success{% else %}danger{% endif %}">
+                                {% if livro.disponivel %}Disponível{% else %}Indisponível{% endif %}
+                            </span>
+                            <br>
+                            <small>Quantidade: {{ livro.quantidade }}</small>
+                        </td>
+                        <td>
+                            <div class="btn-group btn-group-sm">
+                                <a href="{% url 'detalhar_livro' livro.id %}" class="btn btn-info" title="Ver">
+                                    <i class="bi bi-eye"></i>
+                                </a>
+                                <a href="{% url 'editar_livro' livro.id %}" class="btn btn-warning" title="Editar">
+                                    <i class="bi bi-pencil"></i>
+                                </a>
+                                <a href="{% url 'excluir_livro' livro.id %}" class="btn btn-danger" title="Excluir">
+                                    <i class="bi bi-trash"></i>
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {% else %}
+        <div class="text-center py-5">
+            <div class="display-1 text-muted">
+                <i class="bi bi-book"></i>
+            </div>
+            <h3 class="text-muted">Nenhum livro cadastrado</h3>
+            <p class="text-muted">Comece adicionando seu primeiro livro!</p>
+            <a href="{% url 'adicionar_livro' %}" class="btn btn-primary btn-lg">
+                <i class="bi bi-plus-circle"></i> Adicionar Primeiro Livro
+            </a>
+        </div>
+        {% endif %}
+    </div>
+</div>
+
+<div class="mt-3">
+    <a href="{% url 'home' %}" class="btn btn-outline-secondary">
+        <i class="bi bi-arrow-left"></i> Voltar para Início
+    </a>
+</div>
+{% endblock %}

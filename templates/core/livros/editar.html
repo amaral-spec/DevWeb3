@@ -1,0 +1,98 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Editar {{ livro.titulo }} - Biblioteca Digital{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-header bg-warning text-dark">
+                <h3 class="mb-0">
+                    <i class="bi bi-pencil"></i> Editar Livro: {{ livro.titulo }}
+                </h3>
+            </div>
+            <div class="card-body">
+                <form method="post">
+                    {% csrf_token %}
+                    
+                    <div class="row">
+                        <!-- Título -->
+                        <div class="col-md-12 mb-3">
+                            <label for="titulo" class="form-label">Título *</label>
+                            <input type="text" class="form-control" id="titulo" name="titulo" 
+                                   value="{{ livro.titulo }}" required>
+                        </div>
+                        
+                        <!-- Autor -->
+                        <div class="col-md-6 mb-3">
+                            <label for="autor" class="form-label">Autor *</label>
+                            <select class="form-select" id="autor" name="autor" required>
+                                {% for autor in autores %}
+                                <option value="{{ autor.id }}" {% if autor.id == livro.autor.id %}selected{% endif %}>
+                                    {{ autor.nome }}
+                                </option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        
+                        <!-- Editora -->
+                        <div class="col-md-6 mb-3">
+                            <label for="editora" class="form-label">Editora</label>
+                            <input type="text" class="form-control" id="editora" name="editora" 
+                                   value="{{ livro.editora }}">
+                        </div>
+                        
+                        <!-- Ano -->
+                        <div class="col-md-6 mb-3">
+                            <label for="ano_publicacao" class="form-label">Ano de Publicação</label>
+                            <input type="number" class="form-control" id="ano_publicacao" 
+                                   name="ano_publicacao" value="{{ livro.ano_publicacao }}">
+                        </div>
+                        
+                        <!-- Quantidade -->
+                        <div class="col-md-6 mb-3">
+                            <label for="quantidade" class="form-label">Quantidade</label>
+                            <input type="number" class="form-control" id="quantidade" 
+                                   name="quantidade" value="{{ livro.quantidade }}" min="0">
+                        </div>
+                        
+                        <!-- Categoria -->
+                        <div class="col-md-12 mb-3">
+                            <label for="categoria" class="form-label">Categoria</label>
+                            <select class="form-select" id="categoria" name="categoria">
+                                <option value="">Selecione...</option>
+                                {% for categoria in categorias %}
+                                <option value="{{ categoria.id }}" 
+                                    {% if livro.categoria and categoria.id == livro.categoria.id %}selected{% endif %}>
+                                    {{ categoria.nome }}
+                                </option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        
+                        <!-- Disponibilidade -->
+                        <div class="col-md-12 mb-3">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="disponivel" 
+                                       name="disponivel" {% if livro.disponivel %}checked{% endif %}>
+                                <label class="form-check-label" for="disponivel">
+                                    Disponível para empréstimo
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                        <a href="{% url 'detalhar_livro' livro.id %}" class="btn btn-secondary me-md-2">
+                            <i class="bi bi-x-circle"></i> Cancelar
+                        </a>
+                        <button type="submit" class="btn btn-warning">
+                            <i class="bi bi-check-circle"></i> Atualizar Livro
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

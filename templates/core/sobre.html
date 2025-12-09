@@ -1,0 +1,149 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Sobre o Sistema - Biblioteca Digital{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <h1 class="mb-4">📚 Sobre o Sistema</h1>
+        
+        <div class="card mb-4">
+            <div class="card-body">
+                <h3 class="card-title">Biblioteca Digital com Django</h3>
+                <p class="card-text">
+                    Este sistema foi desenvolvido como trabalho acadêmico utilizando o framework Django.
+                    O objetivo é demonstrar a criação de um sistema web completo com operações CRUD,
+                    autenticação de usuários e interface responsiva.
+                </p>
+            </div>
+        </div>
+        
+        <div class="row">
+            <!-- Funcionalidades -->
+            <div class="col-md-6 mb-4">
+                <div class="card h-100">
+                    <div class="card-header bg-primary text-white">
+                        <h5 class="mb-0">🛠 Funcionalidades</h5>
+                    </div>
+                    <div class="card-body">
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">
+                                <i class="bi bi-check-circle-fill text-success me-2"></i>
+                                CRUD Completo de Livros
+                            </li>
+                            <li class="list-group-item">
+                                <i class="bi bi-check-circle-fill text-success me-2"></i>
+                                Gestão de Autores
+                            </li>
+                            <li class="list-group-item">
+                                <i class="bi bi-check-circle-fill text-success me-2"></i>
+                                Sistema de Empréstimos
+                            </li>
+                            <li class="list-group-item">
+                                <i class="bi bi-check-circle-fill text-success me-2"></i>
+                                Autenticação de Usuários
+                            </li>
+                            <li class="list-group-item">
+                                <i class="bi bi-check-circle-fill text-success me-2"></i>
+                                Painel Administrativo
+                            </li>
+                            <li class="list-group-item">
+                                <i class="bi bi-check-circle-fill text-success me-2"></i>
+                                Interface Responsiva
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Tecnologias -->
+            <div class="col-md-6 mb-4">
+                <div class="card h-100">
+                    <div class="card-header bg-success text-white">
+                        <h5 class="mb-0">💻 Tecnologias Utilizadas</h5>
+                    </div>
+                    <div class="card-body">
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">
+                                <strong>Django 4.2+</strong> - Framework web Python
+                            </li>
+                            <li class="list-group-item">
+                                <strong>Python 3.10+</strong> - Linguagem de programação
+                            </li>
+                            <li class="list-group-item">
+                                <strong>SQLite</strong> - Banco de dados para desenvolvimento
+                            </li>
+                            <li class="list-group-item">
+                                <strong>Bootstrap 5</strong> - Framework CSS
+                            </li>
+                            <li class="list-group-item">
+                                <strong>HTML5/CSS3</strong> - Frontend
+                            </li>
+                            <li class="list-group-item">
+                                <strong>JavaScript</strong> - Interatividade
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Estrutura do Projeto -->
+        <div class="card mb-4">
+            <div class="card-header bg-info text-white">
+                <h5 class="mb-0">📁 Estrutura do Projeto</h5>
+            </div>
+            <div class="card-body">
+                <pre class="bg-light p-3 rounded">
+biblioteca_django/
+├── biblioteca/           # Configuração do projeto
+├── core/                # App principal (modelos, views)
+├── templates/           # Templates HTML
+│   └── core/
+├── static/             # Arquivos estáticos
+├── media/              # Uploads de arquivos
+├── db.sqlite3          # Banco de dados
+└── manage.py           # Script de gerenciamento</pre>
+            </div>
+        </div>
+        
+        <!-- CRUDs Implementados -->
+        <div class="card">
+            <div class="card-header bg-warning text-dark">
+                <h5 class="mb-0">🎯 CRUDs Implementados</h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="text-center p-3">
+                            <div class="display-4 text-primary">📖</div>
+                            <h5>Livros</h5>
+                            <p class="text-muted">Create, Read, Update, Delete</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="text-center p-3">
+                            <div class="display-4 text-success">👤</div>
+                            <h5>Autores</h5>
+                            <p class="text-muted">Create, Read, Update, Delete</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="text-center p-3">
+                            <div class="display-4 text-danger">🔄</div>
+                            <h5>Empréstimos</h5>
+                            <p class="text-muted">Create, Read, Update, Delete</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="mt-4 text-center">
+            <a href="{% url 'home' %}" class="btn btn-primary">
+                <i class="bi bi-arrow-left"></i> Voltar para a Página Inicial
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,113 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Logout - Biblioteca Digital{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <div class="card text-center">
+            <div class="card-body py-5">
+                <!-- Ícone de confirmação -->
+                <div class="display-1 text-success mb-4">
+                    <i class="bi bi-check-circle"></i>
+                </div>
+                
+                <!-- Mensagem principal -->
+                <h2 class="card-title mb-4">Logout Realizado com Sucesso!</h2>
+                
+                <p class="card-text text-muted mb-4">
+                    Você foi desconectado do sistema com segurança.
+                </p>
+                
+                <!-- Contador regressivo -->
+                <div class="mb-4">
+                    <p class="text-muted">
+                        Você será redirecionado para a página inicial em 
+                        <span id="countdown">5</span> segundos...
+                    </p>
+                </div>
+                
+                <!-- Botões de ação -->
+                <div class="d-grid gap-2">
+                    <a href="{% url 'login' %}" class="btn btn-primary btn-lg">
+                        <i class="bi bi-box-arrow-in-right"></i> Fazer Login Novamente
+                    </a>
+                    
+                    <a href="{% url 'home' %}" class="btn btn-outline-secondary">
+                        <i class="bi bi-house"></i> Voltar para a Página Inicial
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Rodapé informativo -->
+            <div class="card-footer text-muted">
+                <small>
+                    <i class="bi bi-shield-check"></i>
+                    Sua sessão foi encerrada com segurança
+                </small>
+            </div>
+        </div>
+        
+        <!-- Informações adicionais -->
+        <div class="card mt-3">
+            <div class="card-body">
+                <h5 class="card-title">
+                    <i class="bi bi-info-circle"></i> Dicas de Segurança
+                </h5>
+                <ul class="list-unstyled">
+                    <li class="mb-2">
+                        <i class="bi bi-check text-success"></i>
+                        Sempre faça logout ao usar computadores públicos
+                    </li>
+                    <li class="mb-2">
+                        <i class="bi bi-check text-success"></i>
+                        Mantenha sua senha em segredo
+                    </li>
+                    <li>
+                        <i class="bi bi-check text-success"></i>
+                        Use senhas fortes e diferentes para cada serviço
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Script para contador regressivo -->
+<script>
+    let seconds = 5;
+    const countdownElement = document.getElementById('countdown');
+    const countdownInterval = setInterval(function() {
+        seconds--;
+        countdownElement.textContent = seconds;
+        
+        if (seconds <= 0) {
+            clearInterval(countdownInterval);
+            window.location.href = "{% url 'home' %}";
+        }
+    }, 1000);
+</script>
+
+<style>
+    .card {
+        border: none;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        border-radius: 15px;
+    }
+    
+    .display-1 {
+        font-size: 5rem;
+    }
+    
+    #countdown {
+        font-weight: bold;
+        color: #0d6efd;
+        font-size: 1.2em;
+    }
+    
+    .btn-lg {
+        padding: 12px 24px;
+        font-size: 1.1rem;
+    }
+</style>
+{% endblock %}

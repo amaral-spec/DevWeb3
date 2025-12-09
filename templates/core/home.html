@@ -1,0 +1,112 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Página Inicial - Biblioteca Digital{% endblock %}
+
+{% block content %}
+<div class="row mb-5">
+    <div class="col-12">
+        <div class="p-5 bg-primary text-white rounded-3">
+            <h1 class="display-4">Bem-vindo à Biblioteca Digital</h1>
+            <p class="lead">Sistema completo para gestão de livros, autores e empréstimos.</p>
+            <a href="{% url 'listar_livros' %}" class="btn btn-light btn-lg">
+                <i class="bi bi-book"></i> Ver Todos os Livros
+            </a>
+        </div>
+    </div>
+</div>
+
+<div class="row mb-4">
+    <div class="col-md-4">
+        <div class="card text-center">
+            <div class="card-body">
+                <div class="feature-icon mb-3">
+                    <i class="bi bi-book"></i>
+                </div>
+                <h3>{{ total_livros }}</h3>
+                <p class="text-muted">Livros Cadastrados</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card text-center">
+            <div class="card-body">
+                <div class="feature-icon mb-3">
+                    <i class="bi bi-people"></i>
+                </div>
+                <h3>{{ total_autores }}</h3>
+                <p class="text-muted">Autores</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card text-center">
+            <div class="card-body">
+                <div class="feature-icon mb-3">
+                    <i class="bi bi-clock-history"></i>
+                </div>
+                <h3>24/7</h3>
+                <p class="text-muted">Acesso Online</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Últimos Livros -->
+<div class="row">
+    <div class="col-12">
+        <h2 class="mb-4">Livros Recentes</h2>
+    </div>
+    
+    {% for livro in livros %}
+    <div class="col-md-4 mb-4">
+        <div class="card h-100">
+            <div class="card-body">
+                <h5 class="card-title">{{ livro.titulo }}</h5>
+                <h6 class="card-subtitle mb-2 text-muted">{{ livro.autor.nome }}</h6>
+                <p class="card-text">
+                    <small>Editora: {{ livro.editora }}</small><br>
+                    <small>Ano: {{ livro.ano_publicacao }}</small><br>
+                    <small>Categoria: {{ livro.categoria.nome|default:"Sem categoria" }}</small>
+                </p>
+                <span class="badge bg-{% if livro.disponivel %}success{% else %}danger{% endif %}">
+                    {% if livro.disponivel %}Disponível{% else %}Indisponível{% endif %}
+                </span>
+            </div>
+            <div class="card-footer bg-transparent">
+                <a href="{% url 'detalhar_livro' livro.id %}" class="btn btn-sm btn-outline-primary">
+                    Ver Detalhes
+                </a>
+            </div>
+        </div>
+    </div>
+    {% empty %}
+    <div class="col-12">
+        <div class="alert alert-info">
+            Nenhum livro cadastrado no momento.
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+<div class="row mt-5">
+    <div class="col-12 text-center">
+        <div class="p-4 bg-light rounded">
+            <h4>Comece a usar agora!</h4>
+            <p>
+                {% if user.is_authenticated %}
+                <a href="{% url 'adicionar_livro' %}" class="btn btn-success btn-lg">
+                    <i class="bi bi-plus-circle"></i> Adicionar Novo Livro
+                </a>
+                {% else %}
+                <a href="{% url 'registro' %}" class="btn btn-primary btn-lg me-2">
+                    <i class="bi bi-person-plus"></i> Criar Conta
+                </a>
+                <a href="{% url 'login' %}" class="btn btn-outline-primary btn-lg">
+                    <i class="bi bi-box-arrow-in-right"></i> Fazer Login
+                </a>
+                {% endif %}
+            </p>
+        </div>
+    </div>
+</div>
+{% endblock %}
